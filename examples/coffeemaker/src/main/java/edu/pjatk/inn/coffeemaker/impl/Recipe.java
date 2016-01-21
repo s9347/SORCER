@@ -27,12 +27,14 @@ public class Recipe implements Serializable {
     }
     
     /**
+     * Returns the amount of chocolate in the coffee recipe.
 	 * @return   Returns the amtChocolate.
 	 */
     public int getAmtChocolate() {
 		return amtChocolate;
 	}
     /**
+     * Sets the amount of chocolate in the coffee recipe.
 	 * @param amtChocolate   The amtChocolate to set.
 	 */
     public void setAmtChocolate(int amtChocolate) {
@@ -41,12 +43,14 @@ public class Recipe implements Serializable {
 		} 
 	}
     /**
+     * Returns the amount of coffee in the coffee recipe.
 	 * @return   Returns the amtCoffee.
 	 */
     public int getAmtCoffee() {
 		return amtCoffee;
 	}
     /**
+     * Sets the amount of coffee in the coffee recipe.
 	 * @param amtCoffee   The amtCoffee to set.
 	 */
     public void setAmtCoffee(int amtCoffee) {
@@ -55,12 +59,14 @@ public class Recipe implements Serializable {
 		} 
 	}
     /**
+     * Returns the amount of milk in the coffee recipe.
 	 * @return   Returns the amtMilk.
 	 */
     public int getAmtMilk() {
 		return amtMilk;
 	}
     /**
+     * Sets the amount of milk in the coffee recipe.
 	 * @param amtMilk   The amtMilk to set.
 	 */
     public void setAmtMilk(int amtMilk) {
@@ -69,12 +75,14 @@ public class Recipe implements Serializable {
 		} 
 	}
     /**
+     * Returns the amount of sugar in the coffee recipe.
 	 * @return   Returns the amtSugar.
 	 */
     public int getAmtSugar() {
 		return amtSugar;
 	}
     /**
+     * Sets the amount of sugar in the coffee recipe.
 	 * @param amtSugar   The amtSugar to set.
 	 */
     public void setAmtSugar(int amtSugar) {
@@ -83,12 +91,14 @@ public class Recipe implements Serializable {
 		} 
 	}
     /**
+     * Returns the name of the coffee recipe.
 	 * @return   Returns the name.
 	 */
     public String getName() {
 		return name;
 	}
     /**
+     * Sets the name of the coffee recipe.
 	 * @param name   The name to set.
 	 */
     public void setName(String name) {
@@ -97,19 +107,26 @@ public class Recipe implements Serializable {
     	}
 	}
     /**
+     * Returns the price of the coffee recipe.
 	 * @return   Returns the price.
 	 */
     public int getPrice() {
 		return price;
 	}
     /**
+     * Sets the price of the coffee recipe.
 	 * @param price   The price to set.
 	 */
     public void setPrice(int price) {
 		if (price >= 0) {
 			this.price = price;
 		} 
-	} 
+	}
+    /**
+     * Returns true if the recipe has the same name as given recipe.
+     * @param r  The recipe to compare.
+     * @return boolean
+     */
     public boolean equals(Recipe r) {
         if((this.name).equals(r.getName())) {
             return true;
@@ -119,7 +136,11 @@ public class Recipe implements Serializable {
     public String toString() {
     	return name;
     }
-
+	/**
+     * Returns the recipe of the coffee from given Context.
+	 * @param context  The context of the recipe.
+	 * @return Returns the recipe.
+	 */
 	static public Recipe getRecipe(Context context) throws ContextException {
 		Recipe r = new Recipe();
 		r.name = (String)context.getValue("name");
@@ -130,7 +151,11 @@ public class Recipe implements Serializable {
 		r.amtChocolate = (int)context.getValue("amtChocolate");
 		return r;
 	}
-
+	/**
+     * Returns the context of given recipe.
+	 * @param recipe  The recipe to give.
+	 * @return Returns the context of recipe.
+	 */
 	static public Context getContext(Recipe recipe) throws ContextException {
 		Context cxt = new ServiceContext();
 		cxt.putValue("name", recipe.getName());
