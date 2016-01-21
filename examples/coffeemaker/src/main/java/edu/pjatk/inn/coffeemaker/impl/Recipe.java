@@ -125,7 +125,7 @@ public class Recipe implements Serializable {
     /**
      * Returns true if the recipe has the same name as given recipe.
      * @param r  The recipe to compare.
-     * @return boolean
+     * @return true if the recipes have the same name; false otherwise.
      */
     public boolean equals(Recipe r) {
         if((this.name).equals(r.getName())) {
@@ -133,6 +133,10 @@ public class Recipe implements Serializable {
         }
         return false;
     }
+	/**
+	 * Returns a String object representing this Recipe, equal to its name.
+	 * @return a String representation of this Recipe.
+	 */
     public String toString() {
     	return name;
     }
