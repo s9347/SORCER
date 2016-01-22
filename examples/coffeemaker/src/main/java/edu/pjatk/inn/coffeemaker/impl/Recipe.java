@@ -34,7 +34,7 @@ public class Recipe implements Serializable {
 		return amtChocolate;
 	}
     /**
-     * Sets the amount of chocolate in the coffee recipe.
+     * Sets the amount of chocolate in the coffee recipe if the amount is positive number.
 	 * @param amtChocolate   The amtChocolate to set.
 	 */
     public void setAmtChocolate(int amtChocolate) {
@@ -50,7 +50,7 @@ public class Recipe implements Serializable {
 		return amtCoffee;
 	}
     /**
-     * Sets the amount of coffee in the coffee recipe.
+     * Sets the amount of coffee in the coffee recipe if the amount is positive number.
 	 * @param amtCoffee   The amtCoffee to set.
 	 */
     public void setAmtCoffee(int amtCoffee) {
@@ -66,7 +66,7 @@ public class Recipe implements Serializable {
 		return amtMilk;
 	}
     /**
-     * Sets the amount of milk in the coffee recipe.
+     * Sets the amount of milk in the coffee recipe if the amount is positive number.
 	 * @param amtMilk   The amtMilk to set.
 	 */
     public void setAmtMilk(int amtMilk) {
@@ -82,7 +82,7 @@ public class Recipe implements Serializable {
 		return amtSugar;
 	}
     /**
-     * Sets the amount of sugar in the coffee recipe.
+     * Sets the amount of sugar in the coffee recipe if the amount is positive number.
 	 * @param amtSugar   The amtSugar to set.
 	 */
     public void setAmtSugar(int amtSugar) {
@@ -98,7 +98,7 @@ public class Recipe implements Serializable {
 		return name;
 	}
     /**
-     * Sets the name of the coffee recipe.
+     * Sets the name of the coffee recipe if the name isn't null.
 	 * @param name   The name to set.
 	 */
     public void setName(String name) {
@@ -114,7 +114,7 @@ public class Recipe implements Serializable {
 		return price;
 	}
     /**
-     * Sets the price of the coffee recipe.
+     * Sets the price of the coffee recipe if the price is a positive number.
 	 * @param price   The price to set.
 	 */
     public void setPrice(int price) {
@@ -141,7 +141,7 @@ public class Recipe implements Serializable {
     	return name;
     }
 	/**
-     * Returns the recipe of the coffee from given Context.
+     * Creates the recipe of the coffee from given Context and returns it.
 	 * @param context  The context of the recipe.
 	 * @return Returns the recipe.
 	 */
@@ -156,7 +156,7 @@ public class Recipe implements Serializable {
 		return r;
 	}
 	/**
-     * Returns the context of given recipe.
+     * Creates the context of given recipe and returns it.
 	 * @param recipe  The recipe to give.
 	 * @return Returns the context of recipe.
 	 */
@@ -165,7 +165,7 @@ public class Recipe implements Serializable {
 		cxt.putValue("name", recipe.getName());
 		cxt.putValue("price", recipe.getPrice());
 		cxt.putValue("amtCoffee", recipe.getAmtCoffee());
-		cxt.putValue("amtMilk", recipe.getAmtMilk());
+		cxt.putValue(	"amtMilk", recipe.getAmtMilk());
 		cxt.putValue("amtSugar", recipe.getAmtSugar());
 		cxt.putValue("amtChocolate", recipe.getAmtChocolate());
 		return cxt;
