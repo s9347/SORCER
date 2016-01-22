@@ -92,6 +92,7 @@ public class CoffeeMakerTest {
 	public void addContextRecepie() throws Exception {
 		coffeeMaker.addRecipe(Recipe.getContext(mocha));
 		assertEquals(coffeeMaker.getRecipeForName("mocha").getName(), "mocha");
+		assertEquals(true,false);
 	}
 
 	@Test
