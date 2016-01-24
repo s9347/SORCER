@@ -4,9 +4,7 @@ import edu.pjatk.inn.coffeemaker.impl.CoffeeMaker;
 import edu.pjatk.inn.coffeemaker.impl.Inventory;
 import edu.pjatk.inn.coffeemaker.impl.Recipe;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * 
@@ -16,6 +14,8 @@ import java.io.InputStreamReader;
  */
 public class CoffeemakerRequestor {
     private static CoffeeMaker coffeeMaker;
+	public static int obecny;
+	public static String[] input;
 
     public static void mainMenu() {
         System.out.println("1. Add a recipe");
@@ -28,7 +28,7 @@ public class CoffeemakerRequestor {
         
         //Get user input
         int userInput = stringToInt(inputOutput("Please press the number that corresponds to what you would like the coffee maker to do."));
-        
+
         if(userInput == 1) addRecipe();
         if(userInput == 2) deleteRecipe();
         if(userInput == 3) editRecipe();
@@ -284,6 +284,7 @@ public class CoffeemakerRequestor {
         System.out.println(message);
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    String returnString = "";
+		ParseNext();
 	    try {
 	        returnString = br.readLine();
 	    }
@@ -293,7 +294,11 @@ public class CoffeemakerRequestor {
 	    }
 	    return returnString;
     }
-    
+	public static void ParseNext(){
+		StringBufferInputStream brr= new StringBufferInputStream(input[obecny]);
+		System.setIn(brr);
+		obecny++;
+	}
     private static int stringToInt(String value) {
         int returnInt = -1;
         try {
@@ -305,9 +310,227 @@ public class CoffeemakerRequestor {
         return returnInt;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 	    coffeeMaker = new CoffeeMaker();
-	    System.out.println("Welcome to the CoffeeMaker!\n");
-	    mainMenu();
+		checkOptions2();
 	}
+	public static void checkOptions1() throws IOException {
+		input=new String[]{"0"};
+		mainMenu();
+	}
+	public static void checkOptions2() throws IOException {
+		input=new String[]{"1"};
+		mainMenu();
+	}
+	public static void checkOptions3() throws IOException {
+		input=new String[]{"2"};
+		mainMenu();
+	}
+	public static void checkOptions4() throws IOException {
+		input=new String[]{"3"};
+		mainMenu();
+	}
+	public static void checkOptions5() throws IOException {
+		input=new String[]{"4"};
+		mainMenu();
+	}
+	public static void checkOptions6() throws IOException {
+		input=new String[]{"5"};
+		mainMenu();
+	}
+	public static void checkOptions7() throws IOException {
+		input=new String[]{"6"};
+		mainMenu();
+	}
+	public static void addRecipe1() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0"};
+		mainMenu();
+	}
+	public static void addRecipe2() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Coffee","50","3","1","1","0"};
+		//nie mozna dodac 2 razy tego samego Recipe
+		mainMenu();
+	}
+	public static void addRecipe3() throws IOException {
+		input=new String[]{"1","Mocha","-50"};
+		mainMenu();
+	}
+	public static void addRecipe4() throws IOException {
+		input=new String[]{"1","Mocha","60","-3"};
+		mainMenu();
+	}
+	public static void addRecipe5() throws IOException {
+		input=new String[]{"1","Mocha","60","3","-2"};
+		mainMenu();
+	}
+	public static void addRecipe6() throws IOException {
+		input=new String[]{"1","Mocha","60","3","2","-2"};
+		mainMenu();
+	}
+	public static void addRecipe7() throws IOException {
+		input=new String[]{"1","Mocha","60","3","2","2","-3"};
+		mainMenu();
+	}
+	public static void addRecipe8() throws IOException {
+		input=new String[]{"1","Mocha","a"};
+		mainMenu();
+	}
+
+	public static void addRecipe9() throws IOException {
+		input=new String[]{"1","Mocha","60","a"};
+		mainMenu();
+	}
+	public static void addRecipe10() throws IOException {
+		input=new String[]{"1","Mocha","60","3","a"};
+		mainMenu();
+	}
+	public static void addRecip311() throws IOException {
+		input=new String[]{"1","Mocha","60","3","2","a"};
+		mainMenu();
+	}
+	public static void addRecipe12() throws IOException {
+		input=new String[]{"1","Mocha","60","3","2","2","a"};
+		mainMenu();
+	}
+
+	public static void addRecipe13() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3"};
+		mainMenu();
+	}
+
+	public static void addRecipe14() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0"};
+		mainMenu();
+	}
+
+	public static void addRecipe15() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","1","Hot Chocolate","60","0","2","2","3"};
+		//max 3 napoje
+		mainMenu();
+	}
+	public static void deleteRecipe1() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","2","3"};
+		mainMenu();
+	}
+
+	public static void deleteRecipe2() throws IOException {
+		input = new String[]{"2"};
+		//nie ma niczego wiec nie mozna usunac
+		mainMenu();
+	}
+
+	public static void editRecipe1() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Coffee","50","3","1","1","0"};
+		//zamiana recipe 3 na coffee
+		mainMenu();
+	}
+	public static void editRecipe2() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Coffee","50","3","1","1","0","3","3","Coffee","50","3","1","1","0"};
+		//zamiana recipe 3 na coffee ponownie co powinno dac blad
+		mainMenu();
+	}
+	public static void editRecipe3() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","-50"};
+		mainMenu();
+	}
+	public static void editRecipe4() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","-3"};
+		mainMenu();
+	}
+	public static void editRecipe5() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","3","-2"};
+		mainMenu();
+	}
+	public static void editRecipe6() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","3","2","-2"};
+		mainMenu();
+	}
+	public static void editRecipe7() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","3","2","2","-3"};
+		mainMenu();
+	}
+	public static void editRecipe8() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","a"};
+		mainMenu();
+	}
+	public static void editRecipe9() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","a"};
+		mainMenu();
+	}
+	public static void editRecipe10() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","3","a"};
+		mainMenu();
+	}
+	public static void editRecipe11() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","3","2","a"};
+		mainMenu();
+	}
+	public static void editRecipe12() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","3","3","Mocha","60","3","2","2","a"};
+		mainMenu();
+	}
+
+	public static void addInventory1() throws IOException {
+		input=new String[]{"4","5","3","7","2"};
+		mainMenu();
+	}
+
+	public static void addInventory2() throws IOException {
+		input=new String[]{"4","-1"};
+		mainMenu();
+	}
+
+	public static void addInventory3() throws IOException {
+		input=new String[]{"4","5","-1"};
+		mainMenu();
+	}
+
+	public static void addInventory4() throws IOException {
+		input=new String[]{"4","5","3","-1"};
+		mainMenu();
+	}
+
+	public static void addInventory5() throws IOException {
+		input=new String[]{"4","5","3","7","-1"};
+		mainMenu();
+	}
+
+	public static void addInventory6() throws IOException {
+		input=new String[]{"4","a"};
+		mainMenu();
+	}
+
+	public static void addInventory7() throws IOException {
+		input=new String[]{"4","5","a"};
+		mainMenu();
+	}
+
+	public static void addInventory8() throws IOException {
+		input=new String[]{"4","5","3","a"};
+		mainMenu();
+	}
+
+	public static void addInventory9() throws IOException {
+		input=new String[]{"4","5","3","7","a"};
+		mainMenu();
+	}
+	public static void checkInventory1() throws IOException {
+		input=new String[]{"5"};
+		mainMenu();
+	}
+	public static void purchaseBeverage1() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","6","3","60"};
+		//dodaj 3 napoje, kup 3 zapłac 60, dostan 10 reszty
+		mainMenu();
+	}
+	public static void purchaseBeverage2() throws IOException {
+		input=new String[]{"1","Coffee","50","3","1","1","0","1","Mocha","60","3","2","2","3","1","Latte","60","3","3","2","0","6","3","40","5"};
+		//dodaj 3 napoje, kup 3 sprawdz stan inventory
+		mainMenu();
+	}
+	public static void purchaseBeverage3() throws IOException {
+		input=new String[]{"1","Coffee","50","16","2","3","5","6","3","50"}; //dodaj Kawe ktorej nie można kupić bo nie ma dostatecznie dużo w inventory
+		mainMenu();
+	}
+
 }
