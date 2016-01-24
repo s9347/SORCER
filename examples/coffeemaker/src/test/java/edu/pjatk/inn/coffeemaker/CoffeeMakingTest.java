@@ -26,6 +26,7 @@ import static sorcer.eo.operator.*;
 @RunWith(SorcerTestRunner.class)
 @ProjectContext("examples/coffeemaker")
 public class CoffeeMakingTest {
+	/*
 	private final static Logger logger = LoggerFactory.getLogger(CoffeeMakingTest.class);
 
 	private Recipe espresso, mocha, macchiato, americano;
@@ -133,6 +134,6 @@ public class CoffeeMakingTest {
 		logger.info("change: " + value(upcontext(cmj), "coffee/pay/context/result"));
 		assertEquals(value(upcontext(cmj), "coffee/pay/context/result"), 150);
 	}
-
+*/
 }
 

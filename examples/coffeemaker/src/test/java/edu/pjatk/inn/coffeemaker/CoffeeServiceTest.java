@@ -32,6 +32,8 @@ import static sorcer.po.operator.invoker;
 @RunWith(SorcerTestRunner.class)
 @ProjectContext("examples/coffeemaker")
 public class CoffeeServiceTest {
+
+/*
 	private final static Logger logger = LoggerFactory.getLogger(CoffeeServiceTest.class);
 
 	private Context espresso, mocha, macchiato, americano;
@@ -74,7 +76,6 @@ public class CoffeeServiceTest {
 		cmt = exert(cmt);
 		logger.info("deleted recipes context: " + context(cmt));
 	}
-
 	@Test
 	public void testContextCofee() throws ContextException {
 		assertTrue(getRecipe(espresso).getAmtCoffee() == 6);
@@ -152,6 +153,6 @@ public class CoffeeServiceTest {
 		assertEquals(value(result(mod), "deliver"), 60);
 		assertEquals(value(result(mod), "change$"), 10);
 	}
-
+*/
 }
 

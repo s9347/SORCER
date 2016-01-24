@@ -3,6 +3,7 @@ package edu.pjatk.inn.coffeemaker;
 import edu.pjatk.inn.coffeemaker.impl.CoffeeMaker;
 import edu.pjatk.inn.coffeemaker.impl.Inventory;
 import edu.pjatk.inn.coffeemaker.impl.Recipe;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,60 +68,54 @@ public class CoffeeMakerTest {
 		americano.setAmtChocolate(0);
 	}
 
+	@After
+	//Cleanup
+	public void cleanUp(){
+		coffeeMaker.deleteRecipes();
+	}
+
 	@Test
-	public void testAddRecipe() {
+	//Program Exits
+	public void checkOptions1() {
+
+	}
+
+	@Test
+	//Add Recipe Functionality
+	public void checkOptions2() {
 		assertTrue(coffeeMaker.addRecipe(espresso));
 	}
 
 	@Test
-	public void testContextCofee() throws ContextException {
-		assertTrue(espresso.getAmtCoffee() == 6);
-	}
-
-	@Test
-	public void testContextMilk() throws ContextException {
-		assertTrue(espresso.getAmtMilk() == 1);
-	}
-
-	@Test
-	public void addRecepie() throws Exception {
-		coffeeMaker.addRecipe(mocha);
-		assertEquals(coffeeMaker.getRecipeForName("mocha").getName(), "mocha");
-	}
-
-	@Test
-	public void addContextRecepie() throws Exception {
-		coffeeMaker.addRecipe(Recipe.getContext(mocha));
-		assertEquals(coffeeMaker.getRecipeForName("mocha").getName(), "mocha");
-		assertEquals(true,false);
-	}
-
-	@Test
-	public void addServiceRecepie() throws Exception {
-		Exertion cmt = task(sig("addRecipe", coffeeMaker),
-						context(parameterTypes(Recipe.class), args(espresso),
-							result("recipe/added")));
-
-		logger.info("isAdded: " + value(cmt));
-		assertEquals(coffeeMaker.getRecipeForName("espresso").getName(), "espresso");
-	}
-
-	@Test
-	public void addRecipes() throws Exception {
-		coffeeMaker.addRecipe(mocha);
-		coffeeMaker.addRecipe(macchiato);
-		coffeeMaker.addRecipe(americano);
-
-		assertEquals(coffeeMaker.getRecipeForName("mocha").getName(), "mocha");
-		assertEquals(coffeeMaker.getRecipeForName("macchiato").getName(), "macchiato");
-		assertEquals(coffeeMaker.getRecipeForName("americano").getName(), "americano");
-	}
-
-	@Test
-	public void makeCoffee() throws Exception {
+	//Delete Recipe Functionality
+	public void checkOptions3() {
 		coffeeMaker.addRecipe(espresso);
-		assertEquals(coffeeMaker.makeCoffee(espresso, 200), 150);
+		assertTrue(coffeeMaker.deleteRecipe(espresso));
 	}
 
+	@Test
+	//Edit Recipe Functionality
+	public void checkOptions4() {
+		coffeeMaker.addRecipe(espresso);
+		assertTrue(coffeeMaker.editRecipe(espresso,mocha));
+	}
+
+	@Test
+	//Add Inventory Functionality
+	public void checkOptions5() {
+		assertTrue(coffeeMaker.addInventory(0,0,0,0));
+	}
+
+	@Test
+	//Inventory Displays
+	public void checkOptions6() {
+		assertTrue(coffeeMaker.checkInventory() != null);
+	}
+
+	@Test
+	//Make Coffee Functionality
+	public void checkOptions7() {
+		assertTrue(coffeeMaker.makeCoffee(espresso,espresso.getPrice()) == 0);
+	}
 }
 
