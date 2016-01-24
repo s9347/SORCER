@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @author   Sarah & Mike
  */
-public class Recipe implements Serializable {
+public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterach żeby zapobiec nieprawidłowym typom
     private String name;
     private int price;
     private int amtCoffee;
@@ -37,10 +37,12 @@ public class Recipe implements Serializable {
      * Sets the amount of chocolate in the coffee recipe if the amount is positive number.
 	 * @param amtChocolate   The amtChocolate to set.
 	 */
-    public void setAmtChocolate(int amtChocolate) {
-		if (amtChocolate >= 0) {
-			this.amtChocolate = amtChocolate;
-		} 
+    public void setAmtChocolate(Object amtChocolate) {
+		if(amtChocolate.getClass()==int.class) {
+			if ((int)amtChocolate >= 0) {
+				this.amtChocolate = (int)amtChocolate;
+			}
+		}
 	}
     /**
      * Returns the amount of coffee in the coffee recipe.
@@ -53,10 +55,12 @@ public class Recipe implements Serializable {
      * Sets the amount of coffee in the coffee recipe if the amount is positive number.
 	 * @param amtCoffee   The amtCoffee to set.
 	 */
-    public void setAmtCoffee(int amtCoffee) {
-		if (amtCoffee >= 0) {
-			this.amtCoffee = amtCoffee;
-		} 
+    public void setAmtCoffee(Object amtCoffee) {
+		if(amtCoffee.getClass()==int.class) {
+			if ((int)amtCoffee >= 0) {
+				this.amtCoffee = (int)amtCoffee;
+			}
+		}
 	}
     /**
      * Returns the amount of milk in the coffee recipe.
@@ -69,10 +73,12 @@ public class Recipe implements Serializable {
      * Sets the amount of milk in the coffee recipe if the amount is positive number.
 	 * @param amtMilk   The amtMilk to set.
 	 */
-    public void setAmtMilk(int amtMilk) {
-		if (amtMilk >= 0) {
-			this.amtMilk = amtMilk;
-		} 
+    public void setAmtMilk(Object amtMilk) {
+		if(amtMilk.getClass()==int.class) {
+			if ((int)amtMilk >= 0) {
+				this.amtMilk = (int) amtMilk;
+			}
+		}
 	}
     /**
      * Returns the amount of sugar in the coffee recipe.
@@ -85,10 +91,12 @@ public class Recipe implements Serializable {
      * Sets the amount of sugar in the coffee recipe if the amount is positive number.
 	 * @param amtSugar   The amtSugar to set.
 	 */
-    public void setAmtSugar(int amtSugar) {
-		if (amtSugar >= 0) {
-			this.amtSugar = amtSugar;
-		} 
+    public void setAmtSugar(Object amtSugar) {
+		if(amtSugar.getClass()==int.class) {
+			if ((int)amtSugar >= 0) {
+				this.amtSugar = (int)amtSugar;
+			}
+		}
 	}
     /**
      * Returns the name of the coffee recipe.
@@ -101,10 +109,13 @@ public class Recipe implements Serializable {
      * Sets the name of the coffee recipe if the name isn't null.
 	 * @param name   The name to set.
 	 */
-    public void setName(String name) {
-    	if(name != null) {
-    		this.name = name;
-    	}
+    public void setName(Object name) {
+		if(name.getClass()==String.class){
+    		if((String)name != null) {
+    			this.name = (String)name;
+    		}
+		}
+
 	}
     /**
      * Returns the price of the coffee recipe.
@@ -117,10 +128,12 @@ public class Recipe implements Serializable {
      * Sets the price of the coffee recipe if the price is a positive number.
 	 * @param price   The price to set.
 	 */
-    public void setPrice(int price) {
-		if (price >= 0) {
-			this.price = price;
-		} 
+    public void setPrice(Object price) {
+		if(price.getClass()==int.class) {
+			if ((int) price >= 0) {
+				this.price = (int) price;
+			}
+		}
 	}
     /**
      * Returns true if the recipe has the same name as given recipe.
@@ -165,7 +178,7 @@ public class Recipe implements Serializable {
 		cxt.putValue("name", recipe.getName());
 		cxt.putValue("price", recipe.getPrice());
 		cxt.putValue("amtCoffee", recipe.getAmtCoffee());
-		cxt.putValue(	"amtMilk", recipe.getAmtMilk());
+		cxt.putValue("amtMilk", recipe.getAmtMilk());
 		cxt.putValue("amtSugar", recipe.getAmtSugar());
 		cxt.putValue("amtChocolate", recipe.getAmtChocolate());
 		return cxt;

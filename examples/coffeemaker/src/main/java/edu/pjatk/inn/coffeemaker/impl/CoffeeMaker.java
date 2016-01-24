@@ -2,6 +2,7 @@ package edu.pjatk.inn.coffeemaker.impl;
 
 import edu.pjatk.inn.coffeemaker.CoffeeMaking;
 import edu.pjatk.inn.coffeemaker.CoffeeService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sorcer.service.Context;
@@ -22,7 +23,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 	 */
 	private Recipe [] recipeArray;
 	/** Number of getRecipes in coffee maker */
-	private final int NUM_RECIPES = 4;
+	private final int NUM_RECIPES = 3; //BUG powiniśmy przyjąc max 3 recipes
 	/** Array describing if the array is full */
 	private boolean [] recipeFull;
 	/** Inventory of the coffee maker */
@@ -89,7 +90,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
         if(r != null) {
 	        for(int i = 0; i < NUM_RECIPES; i++) {
 	            if(r.equals(recipeArray[i])) {
-	                recipeArray[i] = recipeArray[i];  
+	                recipeArray[i] =new Recipe(); //BUG nie usuwało prawidłowo
 	                canDeleteRecipe = true;
 	            }
 	        }
@@ -118,24 +119,24 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
      * @param newRecipe
      * @return boolean
      */
-    public boolean editRecipe(Recipe oldRecipe, Recipe newRecipe) {
-        boolean canEditRecipe = false;
-        for(int i = 0; i < NUM_RECIPES; i++) {
-        	if(recipeArray[i].getName() != null) {
-	            if(newRecipe.equals(recipeArray[i])) {
-	            	recipeArray[i] = new Recipe();
-	            	if(addRecipe(newRecipe)) {
-	            		canEditRecipe = true;
-	            	} else {
-	            		//Unreachable line of code
-	            		canEditRecipe = false;
-	            	}
-	            }
-        	}
-        }
-        return canEditRecipe;
-    }
-    
+	public boolean editRecipe(Recipe oldRecipe, Recipe newRecipe) {
+		boolean canEditRecipe = false;
+		for(int i = 0; i < NUM_RECIPES; i++) {
+			if(recipeArray[i].getName() != null) {
+				if(oldRecipe.equals(recipeArray[i])) {//BUG zamieniona w taki sposob by nie mieszała się kolejność
+					if(this.getRecipeForName(newRecipe.getName())==null) {
+						recipeArray[i]=newRecipe;
+						canEditRecipe = true;
+					} else {
+						//Unreachable line of code
+						canEditRecipe = false;
+					}
+				}
+			}
+		}
+		return canEditRecipe;
+	}
+
     /**
      * Returns true if inventory was successfully added
      * @param amtCoffee
@@ -144,17 +145,18 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
      * @param amtChocolate
      * @return boolean
      */
-    public boolean addInventory(int amtCoffee, int amtMilk, int amtSugar, int amtChocolate) {
+    public boolean addInventory(Object amtCoffee, Object amtMilk, Object amtSugar, Object amtChocolate) {//BUG zmiana int na Object żeby poprawnie sprawdzac typy
         boolean canAddInventory = true;
-        if(amtCoffee < 0 || amtMilk < 0 || amtSugar > 0 || amtChocolate < 0) {  
-            canAddInventory = false;
-        }
-        else {
-	        inventory.setCoffee(inventory.getCoffee() + amtCoffee);
-	        inventory.setMilk(inventory.getMilk() + amtMilk);
-	        inventory.setSugar(inventory.getSugar() + amtSugar);
-	        inventory.setChocolate(inventory.getChocolate() + amtChocolate);
-        }
+		if(amtChocolate.getClass()==int.class && amtMilk.getClass()==int.class && amtSugar.getClass()==int.class  && amtChocolate.getClass()==int.class ) {
+			if ((int)amtCoffee < 0 || (int)amtMilk < 0 || (int)amtSugar < 0 || (int)amtChocolate < 0) { //BUG Zmiana > na < w armSugar
+				canAddInventory = false;
+			} else {
+				inventory.setCoffee(inventory.getCoffee() + (int)amtCoffee);
+				inventory.setMilk(inventory.getMilk() + (int)amtMilk);
+				inventory.setSugar(inventory.getSugar() + (int)amtSugar);
+				inventory.setChocolate(inventory.getChocolate() + (int)amtChocolate);
+			}
+		}
         return canAddInventory;
     }
     
@@ -182,7 +184,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
             canMakeCoffee = false;
         }
         if(canMakeCoffee) {
-	        inventory.setCoffee(inventory.getCoffee() + r.getAmtCoffee());
+	        inventory.setCoffee(inventory.getCoffee() - r.getAmtCoffee());//BUG z + na -
 	        inventory.setMilk(inventory.getMilk() - r.getAmtMilk());
 	        inventory.setSugar(inventory.getSugar() - r.getAmtSugar());
 	        inventory.setChocolate(inventory.getChocolate() - r.getAmtChocolate());
