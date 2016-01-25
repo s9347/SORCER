@@ -237,7 +237,7 @@ public class RecipeTest {
         newCoffee.setAmtSugar(1);
         newCoffee.setAmtChocolate(0);
 
-        assertTrue(coffeeMaker.editRecipe(coffee,newCoffee));
+        assertFalse(coffeeMaker.editRecipe(coffee,newCoffee));
     }
 
     @Test
@@ -253,7 +253,7 @@ public class RecipeTest {
         newCoffee.setAmtSugar(1);
         newCoffee.setAmtChocolate(0);
 
-        assertTrue(coffeeMaker.editRecipe(coffee,newCoffee));
+        assertFalse(coffeeMaker.editRecipe(coffee,newCoffee));
     }
 
     @Test

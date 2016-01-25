@@ -42,8 +42,7 @@ it should be
 
 ``` java
 if(oldRecipe.equals(recipeArray[i])) {
-					if(this.getRecipeForName(newRecipe.getName())!=null) {
-
+					if(this.getRecipeForName(newRecipe.getName())==null) {
 						if (newRecipe.getPrice() < 0 || newRecipe.getAmtCoffee() < 0 || newRecipe.getAmtMilk() < 0 || newRecipe.getAmtSugar() < 0 || newRecipe.getAmtChocolate() < 0){
 							canEditRecipe = false;
 						}
@@ -51,18 +50,8 @@ if(oldRecipe.equals(recipeArray[i])) {
 							recipeArray[i]=newRecipe;
 							canEditRecipe = true;
 						}
-					} else {
-						if(oldRecipe.getName().equals(newRecipe.getName())){
-							if (newRecipe.getPrice() < 0 || newRecipe.getAmtCoffee() < 0 || newRecipe.getAmtMilk() < 0 || newRecipe.getAmtSugar() < 0 || newRecipe.getAmtChocolate() < 0){
-								canEditRecipe = false;
-							}
-							else{
-								recipeArray[i]=newRecipe;
-								canEditRecipe = true;
-							}
+					}
 ```
-
-
 
 
 
@@ -115,4 +104,3 @@ was changed to this line
 ``` java
 public boolean addInventory(Object amtCoffee, Object amtMilk, Object amtSugar, Object amtChocolate) {
 ```
-
