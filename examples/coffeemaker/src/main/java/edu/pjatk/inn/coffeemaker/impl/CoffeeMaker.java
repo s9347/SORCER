@@ -131,8 +131,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 		for(int i = 0; i < NUM_RECIPES; i++) {
 			if(recipeArray[i].getName() != null) {
 				if(oldRecipe.equals(recipeArray[i])) {
-					if(this.getRecipeForName(newRecipe.getName())!=null) {
-
+					if(this.getRecipeForName(newRecipe.getName())==null) {
 						if (newRecipe.getPrice() < 0 || newRecipe.getAmtCoffee() < 0 || newRecipe.getAmtMilk() < 0 || newRecipe.getAmtSugar() < 0 || newRecipe.getAmtChocolate() < 0){
 							canEditRecipe = false;
 						}
@@ -141,16 +140,8 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 							canEditRecipe = true;
 						}
 					} else {
-						if(oldRecipe.getName().equals(newRecipe.getName())){
-							if (newRecipe.getPrice() < 0 || newRecipe.getAmtCoffee() < 0 || newRecipe.getAmtMilk() < 0 || newRecipe.getAmtSugar() < 0 || newRecipe.getAmtChocolate() < 0){
-								canEditRecipe = false;
-							}
-							else{
-								recipeArray[i]=newRecipe;
-								canEditRecipe = true;
-							}
-						}else
-							canEditRecipe = false;
+						//Unreachable line of code
+						canEditRecipe = false;
 					}
 				}
 			}
