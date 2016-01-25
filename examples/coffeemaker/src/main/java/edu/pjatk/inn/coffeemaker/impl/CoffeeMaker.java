@@ -23,7 +23,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 	 */
 	private Recipe [] recipeArray;
 	/** Number of getRecipes in coffee maker */
-	private final int NUM_RECIPES = 3;
+	private final int NUM_RECIPES = 3; //BUG powiniśmy przyjąc max 3 recipes
 	/** Array describing if the array is full */
 	private boolean [] recipeFull;
 	/** Inventory of the coffee maker */
@@ -51,38 +51,30 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 	 */
 	public boolean addRecipe(Recipe r) {
         boolean canAddRecipe = true;
-
-		if (r.getPrice() < 0 || r.getAmtCoffee() < 0 || r.getAmtMilk() < 0 || r.getAmtSugar() < 0 || r.getAmtChocolate() < 0){
-			canAddRecipe = false;
-		}
-		else{
-
-			//Check if the recipe already exists
-			for(int i = 0; i < NUM_RECIPES; i++) {
-				if(r.equals(recipeArray[i])) {
-					canAddRecipe = false;
-				}
-			}
-
-			//Check for an empty recipe, add recipe to first empty spot
-			if(canAddRecipe) {
-				int emptySpot = -1;
-				for(int i = 0; i < NUM_RECIPES; i++) {
-					if(!recipeFull[i]) {
-						emptySpot = i;
-						canAddRecipe = true;
-					}
-				}
-				if(emptySpot != -1) {
-					recipeArray[emptySpot] = r;
-					recipeFull[emptySpot] = true;
-				}
-				else {
-					canAddRecipe = false;
-				}
-			}
-		}
-
+            
+        //Check if the recipe already exists
+        for(int i = 0; i < NUM_RECIPES; i++) {
+            if(r.equals(recipeArray[i])) {
+                canAddRecipe = false;
+            }
+        }
+        //Check for an empty recipe, add recipe to first empty spot
+        if(canAddRecipe) {
+        	int emptySpot = -1;
+	        for(int i = 0; i < NUM_RECIPES; i++) {
+	            if(!recipeFull[i]) {
+	                emptySpot = i;
+	                canAddRecipe = true;
+	            }
+	        }
+	        if(emptySpot != -1) {
+		        recipeArray[emptySpot] = r;
+		        recipeFull[emptySpot] = true;
+	        }
+	        else {
+	        	canAddRecipe = false;
+	        }
+        }
         return canAddRecipe;
     }
     
@@ -97,7 +89,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
         if(r != null) {
 	        for(int i = 0; i < NUM_RECIPES; i++) {
 	            if(r.equals(recipeArray[i])) {
-	                recipeArray[i] =new Recipe();
+	                recipeArray[i] =new Recipe(); //BUG nie usuwało prawidłowo
 	                canDeleteRecipe = true;
 	            }
 	        }
@@ -130,27 +122,13 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 		boolean canEditRecipe = false;
 		for(int i = 0; i < NUM_RECIPES; i++) {
 			if(recipeArray[i].getName() != null) {
-				if(oldRecipe.equals(recipeArray[i])) {
-					if(this.getRecipeForName(newRecipe.getName())!=null) {
-
-						if (newRecipe.getPrice() < 0 || newRecipe.getAmtCoffee() < 0 || newRecipe.getAmtMilk() < 0 || newRecipe.getAmtSugar() < 0 || newRecipe.getAmtChocolate() < 0){
-							canEditRecipe = false;
-						}
-						else{
-							recipeArray[i]=newRecipe;
-							canEditRecipe = true;
-						}
+				if(oldRecipe.equals(recipeArray[i])) {//BUG zamieniona w taki sposob by nie mieszała się kolejność
+					if(this.getRecipeForName(newRecipe.getName())==null) {
+						recipeArray[i]=newRecipe;
+						canEditRecipe = true;
 					} else {
-						if(oldRecipe.getName().equals(newRecipe.getName())){
-							if (newRecipe.getPrice() < 0 || newRecipe.getAmtCoffee() < 0 || newRecipe.getAmtMilk() < 0 || newRecipe.getAmtSugar() < 0 || newRecipe.getAmtChocolate() < 0){
-								canEditRecipe = false;
-							}
-							else{
-								recipeArray[i]=newRecipe;
-								canEditRecipe = true;
-							}
-						}else
-							canEditRecipe = false;
+						//Unreachable line of code
+						canEditRecipe = false;
 					}
 				}
 			}
@@ -166,20 +144,17 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
      * @param amtChocolate
      * @return boolean
      */
-    public boolean addInventory(Object amtCoffee, Object amtMilk, Object amtSugar, Object amtChocolate) {
+    public boolean addInventory(Object amtCoffee, Object amtMilk, Object amtSugar, Object amtChocolate) {//BUG zmiana int na Object żeby poprawnie sprawdzac typy
         boolean canAddInventory = true;
-		if(amtCoffee.getClass()==Integer.class && amtMilk.getClass()==Integer.class && amtSugar.getClass()==Integer.class  && amtChocolate.getClass()==Integer.class ) {
-			if ((Integer)amtCoffee < 0 || (Integer)amtMilk < 0 || (Integer)amtSugar < 0 || (Integer)amtChocolate < 0) {
+		if(amtChocolate.getClass()==int.class && amtMilk.getClass()==int.class && amtSugar.getClass()==int.class  && amtChocolate.getClass()==int.class ) {
+			if ((int)amtCoffee < 0 || (int)amtMilk < 0 || (int)amtSugar < 0 || (int)amtChocolate < 0) { //BUG Zmiana > na < w armSugar
 				canAddInventory = false;
 			} else {
-				inventory.setCoffee(inventory.getCoffee() + (Integer)amtCoffee);
-				inventory.setMilk(inventory.getMilk() + (Integer)amtMilk);
-				inventory.setSugar(inventory.getSugar() + (Integer)amtSugar);
-				inventory.setChocolate(inventory.getChocolate() + (Integer)amtChocolate);
+				inventory.setCoffee(inventory.getCoffee() + (int)amtCoffee);
+				inventory.setMilk(inventory.getMilk() + (int)amtMilk);
+				inventory.setSugar(inventory.getSugar() + (int)amtSugar);
+				inventory.setChocolate(inventory.getChocolate() + (int)amtChocolate);
 			}
-		}
-		else{
-			canAddInventory = false;
 		}
         return canAddInventory;
     }
@@ -208,7 +183,7 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
             canMakeCoffee = false;
         }
         if(canMakeCoffee) {
-	        inventory.setCoffee(inventory.getCoffee() - r.getAmtCoffee());
+	        inventory.setCoffee(inventory.getCoffee() - r.getAmtCoffee());//BUG z + na -
 	        inventory.setMilk(inventory.getMilk() - r.getAmtMilk());
 	        inventory.setSugar(inventory.getSugar() - r.getAmtSugar());
 	        inventory.setChocolate(inventory.getChocolate() - r.getAmtChocolate());
@@ -247,8 +222,6 @@ public class CoffeeMaker implements CoffeeMaking, CoffeeService {
 	public boolean[] getRecipeFull() {
 		return recipeFull;
 	}
-
-
 	// Implementation of CoffeeService
 	@Override
 	public Context addRecipe(Context context) throws RemoteException, ContextException {
