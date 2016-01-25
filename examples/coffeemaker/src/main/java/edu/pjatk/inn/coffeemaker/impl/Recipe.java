@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @author   Sarah & Mike
  */
-public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterach żeby zapobiec nieprawidłowym typom
+public class Recipe implements Serializable {
     private String name;
     private int price;
     private int amtCoffee;
@@ -30,7 +30,7 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
      * Returns the amount of chocolate in the coffee recipe.
 	 * @return   Returns the amtChocolate.
 	 */
-    public int getAmtChocolate() {
+    public Integer getAmtChocolate() {
 		return amtChocolate;
 	}
     /**
@@ -38,17 +38,17 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
 	 * @param amtChocolate   The amtChocolate to set.
 	 */
     public void setAmtChocolate(Object amtChocolate) {
-		if(amtChocolate.getClass()==int.class) {
-			if ((int)amtChocolate >= 0) {
-				this.amtChocolate = (int)amtChocolate;
-			}
-		}
+		if(amtChocolate.getClass()==Integer.class) {
+			if ((Integer)amtChocolate >= 0) {
+				this.amtChocolate = (Integer)amtChocolate;
+			}else this.amtChocolate = -1;
+		}else this.amtChocolate = -1;
 	}
     /**
      * Returns the amount of coffee in the coffee recipe.
 	 * @return   Returns the amtCoffee.
 	 */
-    public int getAmtCoffee() {
+    public Integer getAmtCoffee() {
 		return amtCoffee;
 	}
     /**
@@ -56,17 +56,17 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
 	 * @param amtCoffee   The amtCoffee to set.
 	 */
     public void setAmtCoffee(Object amtCoffee) {
-		if(amtCoffee.getClass()==int.class) {
-			if ((int)amtCoffee >= 0) {
-				this.amtCoffee = (int)amtCoffee;
-			}
-		}
+		if(amtCoffee.getClass()==Integer.class) {
+			if ((Integer)amtCoffee >= 0) {
+				this.amtCoffee = (Integer)amtCoffee;
+			}else this.amtCoffee = -1;
+		}else this.amtCoffee = -1;
 	}
     /**
      * Returns the amount of milk in the coffee recipe.
 	 * @return   Returns the amtMilk.
 	 */
-    public int getAmtMilk() {
+    public Integer getAmtMilk() {
 		return amtMilk;
 	}
     /**
@@ -74,17 +74,17 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
 	 * @param amtMilk   The amtMilk to set.
 	 */
     public void setAmtMilk(Object amtMilk) {
-		if(amtMilk.getClass()==int.class) {
-			if ((int)amtMilk >= 0) {
-				this.amtMilk = (int) amtMilk;
-			}
-		}
+		if(amtMilk.getClass()==Integer.class) {
+			if ((Integer)amtMilk >= 0) {
+				this.amtMilk = (Integer) amtMilk;
+			}else this.amtMilk = -1;
+		}else this.amtMilk = -1;
 	}
     /**
      * Returns the amount of sugar in the coffee recipe.
 	 * @return   Returns the amtSugar.
 	 */
-    public int getAmtSugar() {
+    public Integer getAmtSugar() {
 		return amtSugar;
 	}
     /**
@@ -92,11 +92,11 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
 	 * @param amtSugar   The amtSugar to set.
 	 */
     public void setAmtSugar(Object amtSugar) {
-		if(amtSugar.getClass()==int.class) {
-			if ((int)amtSugar >= 0) {
-				this.amtSugar = (int)amtSugar;
-			}
-		}
+		if(amtSugar.getClass()==Integer.class) {
+			if ((Integer)amtSugar >= 0) {
+				this.amtSugar = (Integer)amtSugar;
+			}else this.amtSugar = -1;
+		}else this.amtSugar = -1;
 	}
     /**
      * Returns the name of the coffee recipe.
@@ -121,7 +121,7 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
      * Returns the price of the coffee recipe.
 	 * @return   Returns the price.
 	 */
-    public int getPrice() {
+    public Integer getPrice() {
 		return price;
 	}
     /**
@@ -129,11 +129,11 @@ public class Recipe implements Serializable {//BUG wprowadzono zmiany w setterac
 	 * @param price   The price to set.
 	 */
     public void setPrice(Object price) {
-		if(price.getClass()==int.class) {
-			if ((int) price >= 0) {
-				this.price = (int) price;
-			}
-		}
+		if(price.getClass()==Integer.class) {
+			if ((Integer) price >= 0) {
+				this.price = (Integer) price;
+			}else this.price = -1;
+		}else this.price = -1;
 	}
     /**
      * Returns true if the recipe has the same name as given recipe.

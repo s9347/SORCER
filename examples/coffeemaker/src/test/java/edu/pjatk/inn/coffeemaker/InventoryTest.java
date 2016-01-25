@@ -71,25 +71,25 @@ public class InventoryTest {
     @Test
     //Please input an integer.
     public void addInventory6() {
-        assertFalse(coffeeMaker.addInventory(Integer.parseInt("a"),0,0,0));
+        assertFalse(coffeeMaker.addInventory("a",0,0,0));
     }
 
     @Test
     //Please input an integer.
     public void addInventory7() {
-        assertFalse(coffeeMaker.addInventory(5,Integer.parseInt("a"),0,0));
+        assertFalse(coffeeMaker.addInventory(5,"a",0,0));
     }
 
     @Test
     //Please input an integer.
     public void addInventory8() {
-        assertFalse(coffeeMaker.addInventory(5,3,Integer.parseInt("a"),0));
+        assertFalse(coffeeMaker.addInventory(5,3,"a",0));
     }
 
     @Test
     //Please input an integer.
     public void addInventory9() {
-        assertFalse(coffeeMaker.addInventory(5,3,7,Integer.parseInt("a")));
+        assertFalse(coffeeMaker.addInventory(5,3,7,"a"));
     }
 
     @Test

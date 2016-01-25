@@ -83,7 +83,7 @@ public class RecipeTest {
         mocha = new Recipe();
         mocha.setName("Mocha");
         mocha.setPrice(-50);
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -93,7 +93,7 @@ public class RecipeTest {
         mocha.setName("Mocha");
         mocha.setPrice(60);
         mocha.setAmtCoffee(-3);
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class RecipeTest {
         mocha.setPrice(60);
         mocha.setAmtCoffee(3);
         mocha.setAmtMilk(-2);
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -116,7 +116,7 @@ public class RecipeTest {
         mocha.setAmtCoffee(3);
         mocha.setAmtMilk(2);
         mocha.setAmtSugar(-2);
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -129,7 +129,7 @@ public class RecipeTest {
         mocha.setAmtMilk(2);
         mocha.setAmtSugar(2);
         mocha.setAmtCoffee(-3);
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -137,8 +137,8 @@ public class RecipeTest {
     public void addRecipe8() {
         mocha = new Recipe();
         mocha.setName("Mocha");
-        mocha.setPrice(Integer.parseInt("a"));
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        mocha.setPrice("a");
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -147,8 +147,8 @@ public class RecipeTest {
         mocha = new Recipe();
         mocha.setName("Mocha");
         mocha.setPrice(60);
-        mocha.setAmtCoffee(Integer.parseInt("a"));
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        mocha.setAmtCoffee("a");
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -158,8 +158,8 @@ public class RecipeTest {
         mocha.setName("Mocha");
         mocha.setPrice(60);
         mocha.setAmtCoffee(3);
-        mocha.setAmtMilk(Integer.parseInt("a"));
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        mocha.setAmtMilk("a");
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -170,8 +170,8 @@ public class RecipeTest {
         mocha.setPrice(60);
         mocha.setAmtCoffee(3);
         mocha.setAmtMilk(2);
-        mocha.setAmtSugar(Integer.parseInt("a"));
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        mocha.setAmtSugar("a");
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
@@ -183,19 +183,21 @@ public class RecipeTest {
         mocha.setAmtCoffee(3);
         mocha.setAmtMilk(2);
         mocha.setAmtSugar(2);
-        mocha.setAmtChocolate(Integer.parseInt("a"));
-        assertFalse(coffeeMaker.addRecipe(coffee));
+        mocha.setAmtChocolate("a");
+        assertFalse(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
     //Coffee successfully added.
     public void addRecipe13() {
+        assertTrue(coffeeMaker.addRecipe(coffee));
         assertTrue(coffeeMaker.addRecipe(mocha));
     }
 
     @Test
     //Coffee successfully added.
     public void addRecipe14() {
+        assertTrue(coffeeMaker.addRecipe(coffee));
         assertTrue(coffeeMaker.addRecipe(mocha));
         assertTrue(coffeeMaker.addRecipe(latte));
     }
@@ -203,6 +205,7 @@ public class RecipeTest {
     @Test
     //Coffee successfully added.
     public void addRecipe15() {
+        assertTrue(coffeeMaker.addRecipe(coffee));
         assertTrue(coffeeMaker.addRecipe(mocha));
         assertTrue(coffeeMaker.addRecipe(latte));
         assertFalse(coffeeMaker.addRecipe(hotChocolate));
@@ -251,7 +254,6 @@ public class RecipeTest {
         newCoffee.setAmtChocolate(0);
 
         assertTrue(coffeeMaker.editRecipe(coffee,newCoffee));
-        assertFalse(coffeeMaker.editRecipe(newCoffee,newCoffee));
     }
 
     @Test
@@ -331,7 +333,7 @@ public class RecipeTest {
 
         Recipe newMocha = new Recipe();
         newMocha.setName("Mocha");
-        newMocha.setPrice(Integer.parseInt("a"));
+        newMocha.setPrice("a");
 
         assertFalse(coffeeMaker.editRecipe(coffee,newMocha));
     }
@@ -344,7 +346,7 @@ public class RecipeTest {
         Recipe newMocha = new Recipe();
         newMocha.setName("Mocha");
         newMocha.setPrice(50);
-        newMocha.setAmtCoffee(Integer.parseInt("a"));
+        newMocha.setAmtCoffee("a");
 
         assertFalse(coffeeMaker.editRecipe(coffee,newMocha));
     }
@@ -358,7 +360,7 @@ public class RecipeTest {
         newMocha.setName("Mocha");
         newMocha.setPrice(50);
         newMocha.setAmtCoffee(3);
-        newMocha.setAmtMilk(Integer.parseInt("a"));
+        newMocha.setAmtMilk("a");
 
         assertFalse(coffeeMaker.editRecipe(coffee,newMocha));
     }
@@ -373,7 +375,7 @@ public class RecipeTest {
         newMocha.setPrice(50);
         newMocha.setAmtCoffee(3);
         newMocha.setAmtMilk(2);
-        newMocha.setAmtSugar(Integer.parseInt("a"));
+        newMocha.setAmtSugar("a");
 
         assertFalse(coffeeMaker.editRecipe(coffee,newMocha));
     }
@@ -389,8 +391,9 @@ public class RecipeTest {
         newMocha.setAmtCoffee(3);
         newMocha.setAmtMilk(2);
         newMocha.setAmtSugar(2);
-        newMocha.setAmtChocolate(Integer.parseInt("a"));
+        newMocha.setAmtChocolate("a");
 
         assertFalse(coffeeMaker.editRecipe(coffee,newMocha));
     }
+
 }
