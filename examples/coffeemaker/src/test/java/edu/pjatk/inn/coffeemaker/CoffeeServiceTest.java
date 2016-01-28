@@ -33,7 +33,7 @@ import static sorcer.po.operator.invoker;
 @ProjectContext("examples/coffeemaker")
 public class CoffeeServiceTest {
 
-/*
+
 	private final static Logger logger = LoggerFactory.getLogger(CoffeeServiceTest.class);
 
 	private Context espresso, mocha, macchiato, americano;
@@ -153,6 +153,6 @@ public class CoffeeServiceTest {
 		assertEquals(value(result(mod), "deliver"), 60);
 		assertEquals(value(result(mod), "change$"), 10);
 	}
-*/
+
 }
 
