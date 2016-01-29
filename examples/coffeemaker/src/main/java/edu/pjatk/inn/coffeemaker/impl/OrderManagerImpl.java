@@ -18,9 +18,28 @@ public class OrderManagerImpl implements OrderManager{
     Map<Float,OrderImpl> orderList = new HashMap<Float, OrderImpl>();
     Map<Float,Drinker> drinkerList = new HashMap<Float, Drinker>();
 
-    public boolean addOrder(OrderImpl order){
-        orderList.put(order.getOrder_id(),order);
-        return true;
+    public void addOrder(OrderImpl order){
+        if(orderList.containsKey(order.getOrder_id())) {
+            orderList.put(order.getOrder_id(), order);
+            if(order.getOrderManager()!=this)
+            order.setOrderManager(this);
+        }
+    }
+
+    public Map<Float,OrderImpl> getOrders() {
+        return orderList;
+    }
+
+    public Map<Float,Drinker> getDrinkers() {
+        return drinkerList;
+    }
+    public void addDrinker(Drinker d){
+        if (!drinkerList.containsKey(d.getDrinker_id())){
+            drinkerList.put(d.getDrinker_id(),d);
+            if(d.getOrderManagerImpl() !=this){
+                d.setOrderManagerImpl(this);
+            }
+        }
     }
 
     @Override

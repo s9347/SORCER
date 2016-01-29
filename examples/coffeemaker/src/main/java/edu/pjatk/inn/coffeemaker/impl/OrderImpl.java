@@ -52,16 +52,24 @@ public class OrderImpl implements Order {
         return orderManager;
     }
 
-    public void setOrderManager(OrderManager orderManager) {
-        this.orderManager = orderManager;
-    }
+    public void setOrderManager(OrderManagerImpl orderManager) {
 
+        if (this.orderManager != orderManager) {
+            this.orderManager = orderManager;
+            if (orderManager.getOrders().containsKey(order_id)) {
+                orderManager.addOrder(this);
+            }
+        }
+    }
     public Recipe getRecipe() {
         return recipe;
     }
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+        if(!recipe.getOrders().contains(this)){
+            recipe.addOrder(this);
+        }
     }
 
     public Drinker getDrinker() {
@@ -69,11 +77,25 @@ public class OrderImpl implements Order {
     }
 
     public void setDrinker(Drinker drinker) {
-        this.drinker = drinker;
+
+        if(this.drinker!=drinker){
+            this.drinker=drinker;
+            if(drinker.getOrders().contains(this)) {
+                drinker.addOrder(this);
+            }
+        }
     }
 
     public ArrayList<Machine> getMachineList() {
         return machineList;
+    }
+
+    public void addMachine(Machine m){
+        if(!machineList.contains(m)){
+            machineList.add(m);
+            if(m.getOrder()!=this)
+            m.addOrder(this);
+        }
     }
 
     public void setMachineList(ArrayList<Machine> machineList) {
@@ -88,7 +110,7 @@ public class OrderImpl implements Order {
         o.setConfirmed((Boolean)context.getValue("confirmed"));
         o.setDrinker((Drinker)context.getValue("drinker"));
         o.setRecipe((Recipe)context.getValue("recipe"));
-        o.setOrderManager((OrderManager)context.getValue("orderManager"));
+        o.setOrderManager((OrderManagerImpl) context.getValue("orderManager"));
         o.setMachineList((ArrayList<Machine>)context.getValue("machineList"));
         return o;
     }
@@ -109,7 +131,7 @@ public class OrderImpl implements Order {
         o.setConfirmed((Boolean)context.getValue("confirmed"));
         o.setDrinker((Drinker)context.getValue("drinker"));
         o.setRecipe((Recipe)context.getValue("recipe"));
-        o.setOrderManager((OrderManager)context.getValue("orderManager"));
+        o.setOrderManager((OrderManagerImpl) context.getValue("orderManager"));
         o.setMachineList((ArrayList<Machine>)context.getValue("machineList"));
         return o;
     }

@@ -5,6 +5,7 @@ import sorcer.service.Context;
 import sorcer.service.ContextException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * @author   Sarah & Mike
@@ -16,6 +17,7 @@ public class Recipe implements Serializable {
     private int amtMilk;
     private int amtSugar;
     private int amtChocolate;
+	ArrayList<OrderImpl> orders;
     
     public Recipe() {
     	this.name = "";
@@ -25,7 +27,15 @@ public class Recipe implements Serializable {
     	this.amtSugar = 0;
     	this.amtChocolate = 0;
     }
-    
+   public ArrayList<OrderImpl> getOrders() {
+	   return orders;
+   }
+	public void addOrder(OrderImpl o){
+		if (!orders.contains(o)){
+			orders.add(o);
+			o.setRecipe(this);
+		}
+	}
     /**
      * Returns the amount of chocolate in the coffee recipe.
 	 * @return   Returns the amtChocolate.
