@@ -18,10 +18,11 @@ public class Recipe implements Serializable {
     private int amtMilk;
     private int amtSugar;
     private int amtChocolate;
-	ArrayList<OrderImpl> orders;
+	private ArrayList<OrderImpl> orders;
     
     public Recipe() {
     	this.name = "";
+		this.recipe_Id=0;
     	this.price = 0;
     	this.amtCoffee = 0;
     	this.amtMilk = 0;
@@ -171,6 +172,7 @@ public class Recipe implements Serializable {
 	 */
 	static public Recipe getRecipe(Context context) throws ContextException {
 		Recipe r = new Recipe();
+		r.recipe_Id = (Float)context.getValue("id");
 		r.name = (String)context.getValue("name");
 		r.price = (Integer)context.getValue("price");
 		r.amtCoffee = (Integer)context.getValue("amtCoffee");
@@ -186,6 +188,7 @@ public class Recipe implements Serializable {
 	 */
 	static public Context getContext(Recipe recipe) throws ContextException {
 		Context cxt = new ServiceContext();
+		cxt.putValue("id",recipe.getRecipeId());
 		cxt.putValue("name", recipe.getName());
 		cxt.putValue("price", recipe.getPrice());
 		cxt.putValue("amtCoffee", recipe.getAmtCoffee());

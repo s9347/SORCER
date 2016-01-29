@@ -34,6 +34,7 @@ public class CoffeeMakingTest {
 	@Before
 	public void setUp() throws ContextException {
 		espresso = new Recipe();
+		espresso.setRecipeId(1);
 		espresso.setName("espresso");
 		espresso.setPrice(50);
 		espresso.setAmtCoffee(6);
@@ -42,6 +43,7 @@ public class CoffeeMakingTest {
 		espresso.setAmtChocolate(0);
 
 		mocha = new Recipe();
+		mocha.setRecipeId(2);
 		mocha.setName("mocha");
 		mocha.setPrice(100);
 		mocha.setAmtCoffee(8);
@@ -50,6 +52,7 @@ public class CoffeeMakingTest {
 		mocha.setAmtChocolate(2);
 
 		macchiato = new Recipe();
+		macchiato.setRecipeId(3);
 		macchiato.setName("macchiato");
 		macchiato.setPrice(40);
 		macchiato.setAmtCoffee(7);
@@ -58,6 +61,7 @@ public class CoffeeMakingTest {
 		macchiato.setAmtChocolate(0);
 
 		americano = new Recipe();
+		americano.setRecipeId(4);
 		americano.setName("americano");
 		americano.setPrice(40);
 		americano.setAmtCoffee(7);
