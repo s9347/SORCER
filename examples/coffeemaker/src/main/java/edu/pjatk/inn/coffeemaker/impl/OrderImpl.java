@@ -18,6 +18,8 @@ public class OrderImpl implements Order {
     private float order_id;
     private Date creationDate;
     private boolean confirmed = false;
+    private boolean finished = false;
+
 
     private OrderManager orderManager = null;
     private Recipe recipe = null;
@@ -46,6 +48,14 @@ public class OrderImpl implements Order {
 
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean confirmed) {
+        this.finished =finished;
     }
 
     public OrderManager getOrderManager() {
@@ -134,5 +144,27 @@ public class OrderImpl implements Order {
         o.setOrderManager((OrderManagerImpl) context.getValue("orderManager"));
         o.setMachineList((ArrayList<Machine>)context.getValue("machineList"));
         return o;
+    }
+
+    public Machine getMachine(float machine_id) {
+        int i=0;
+        Machine m=null;
+        while(i<machineList.size()){
+            if(machineList.get(i).getMachine_id()==machine_id){
+                m=machineList.get(i);
+            }
+            i++;
+        }
+        return m;
+    }
+
+    public boolean haveMachineId(float machine_id) {
+        int i=0;
+        boolean znalazlem=false;
+        while(i<machineList.size()) {
+            if (machineList.get(i).getMachine_id() == machine_id) znalazlem=true;
+            i++;
+        }
+        return znalazlem;
     }
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author   Sarah & Mike
  */
 public class Recipe implements Serializable {
+	private float recipe_Id;
     private String name;
     private int price;
     private int amtCoffee;
@@ -194,5 +195,12 @@ public class Recipe implements Serializable {
 		return cxt;
 	}
 
+	public void setRecipeId(float r){
+		recipe_Id=r;
+	}
 
+
+	public float getRecipeId() {
+		return recipe_Id;
+	}
 }
