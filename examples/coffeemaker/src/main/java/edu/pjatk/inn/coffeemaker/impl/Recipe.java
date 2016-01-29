@@ -28,6 +28,7 @@ public class Recipe implements Serializable {
     	this.amtMilk = 0;
     	this.amtSugar = 0;
     	this.amtChocolate = 0;
+		this.orders=new ArrayList<OrderImpl>();
     }
    public ArrayList<OrderImpl> getOrders() {
 	   return orders;
@@ -179,6 +180,8 @@ public class Recipe implements Serializable {
 		r.amtMilk = (Integer)context.getValue("amtMilk");
 		r.amtSugar = (Integer)context.getValue("amtSugar");
 		r.amtChocolate = (Integer)context.getValue("amtChocolate");
+		r.orders = (ArrayList<OrderImpl>) context.getValue("orders");
+
 		return r;
 	}
 	/**
@@ -195,7 +198,13 @@ public class Recipe implements Serializable {
 		cxt.putValue("amtMilk", recipe.getAmtMilk());
 		cxt.putValue("amtSugar", recipe.getAmtSugar());
 		cxt.putValue("amtChocolate", recipe.getAmtChocolate());
+		cxt.putValue("orders", recipe.getOrders());
+
 		return cxt;
+	}
+
+	private void setOrders(ArrayList<OrderImpl> o) {
+		this.orders=o;
 	}
 
 	public void setRecipeId(float r){
