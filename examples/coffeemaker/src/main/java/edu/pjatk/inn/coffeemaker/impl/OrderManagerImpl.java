@@ -113,7 +113,6 @@ public class OrderManagerImpl implements OrderManager{
             Machine m = new Machine();
             m.setMachine_id(machine_id);
             m.addOrder(orderList.get(order_id));
-
         }
         return cxt;
     }

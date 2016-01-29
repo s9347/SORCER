@@ -203,10 +203,6 @@ public class Recipe implements Serializable {
 		return cxt;
 	}
 
-	private void setOrders(ArrayList<OrderImpl> o) {
-		this.orders=o;
-	}
-
 	public void setRecipeId(float r){
 		recipe_Id=r;
 	}

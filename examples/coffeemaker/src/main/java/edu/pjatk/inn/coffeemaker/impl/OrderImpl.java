@@ -15,8 +15,8 @@ import java.util.Date;
  * Created by asus on 28.01.2016.
  */
 public class OrderImpl implements Order {
-    private float order_id;
-    private Date creationDate;
+    private float order_id =0;
+    private Date creationDate = new Date();
     private boolean confirmed = false;
     private boolean finished = false;
 

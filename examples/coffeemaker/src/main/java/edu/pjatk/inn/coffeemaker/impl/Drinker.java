@@ -10,11 +10,10 @@ import java.util.ArrayList;
  */
 public class Drinker {
 
-    float drinker_id;
-    String name;
-    ArrayList<OrderImpl> orders;
-    OrderManagerImpl manager;
-
+    float drinker_id = 0;
+    String name = "";
+    ArrayList<OrderImpl> orders = new ArrayList<OrderImpl>();
+    OrderManagerImpl manager= new OrderManagerImpl();
 
     public float getDrinker_id() {
         return drinker_id;

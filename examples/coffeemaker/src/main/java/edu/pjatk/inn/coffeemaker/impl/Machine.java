@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Machine {
 
-    float machine_id;
-    OrderImpl order;
+    float machine_id = 0;
+    OrderImpl order = new OrderImpl();
 
 
     public float getMachine_id() {
