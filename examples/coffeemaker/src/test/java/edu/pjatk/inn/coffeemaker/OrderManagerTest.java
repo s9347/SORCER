@@ -18,6 +18,7 @@ import sorcer.service.Exertion;
 import sorcer.service.Task;
 
 import javax.crypto.Mac;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -77,11 +78,11 @@ public class OrderManagerTest {
 
         order1 = context(ent("order_id",1.0f), ent("orderManager",orderManager),
                 ent("creationDate",new Date()), ent("machineList",machList1),
-                ent("confirmed",false), mocha);
+                ent("confirmed",false), ent("recipe",getRecipe(mocha)));
 
         order2 = context(ent("order_id",2.0f), ent("orderManager",orderManager),
                 ent("creationDate",new Date()), ent("machineList",machList2),
-                ent("confirmed",false), espresso);
+                ent("confirmed",false), ent("recipe",getRecipe(espresso)));
 
         //orderManager.addOrder(order1);
         //orderManager.addOrder(order2);
@@ -109,25 +110,23 @@ public class OrderManagerTest {
 
     @Test
     public void testContextOrderRecipe() throws ContextException {
-        assertTrue(getOrder(order1).getRecipe() != null);
-    }
-
-/*
-    @Test
-    public void testMakeReport() throws Exception {
-        Exertion cmt = task(sig("makeReport", OrderManager.class),
-                context(parameterTypes(), args()));
-        cmt = exert(cmt);
-        assertEquals(value(cmt), true);
+        assertTrue(getOrder(order1).getRecipe().getName() == "mocha");
     }
 
     @Test
-    public void testFindOrder() throws Exception {
-        Task cmt = task(sig("findOrder", OrderManager.class),
-                context(parameterTypes(Float.class), args(2),
-                        result("order/found")));
-
-        assertEquals(value(cmt), true);
+    public void testCreateOrder() throws ContextException, RemoteException{
+        OrderImpl o = new OrderImpl();
+        assertTrue(o.createOrder(order1).getOrder_id() == 1.0f);
     }
-    */
+
+    @Test
+    public void testConfirmOrder() throws Exception {
+        //Powinno sie użyć Order.class, czyly interface zamiast implementacji, ale pojawia się problem
+        //CacheLoader returned null for key class sorcer.core.signature.NetSignature:*;PROC;interface edu.pjatk.inn.coffeemaker.Order;confirmOrder.
+        //Dla wersji OrderImpl.class działa. Mieć to na uwadze przy podobnych problemach.
+        Exertion cmt = task(sig("confirmOrder", OrderImpl.class), order1);
+        Context out = context(exert(cmt));
+        logger.info("job context: " + out);
+        assertEquals(value(out, "order/confirmed"), true);
+    }
 }

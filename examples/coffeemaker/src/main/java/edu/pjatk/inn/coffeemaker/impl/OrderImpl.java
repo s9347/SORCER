@@ -81,7 +81,7 @@ public class OrderImpl implements Order {
     }
 
     @Override
-    public Order createOrder(Context context) throws ContextException {
+    public OrderImpl createOrder(Context context) throws ContextException {
         OrderImpl o = new OrderImpl();
         o.setOrder_id((Float)context.getValue("order_id"));
         o.setCreationDate((Date)context.getValue("creationDate"));
@@ -94,10 +94,10 @@ public class OrderImpl implements Order {
     }
 
     @Override
-    public Context confirmOrder(Context context) throws ContextException {
-        context.putValue("order/confirmed", isConfirmed());
+    public Context confirmOrder(Context context) throws RemoteException, ContextException{
+        context.putValue("order/confirmed", true);
         if (context.getReturnPath() != null) {
-            context.setReturnValue(isConfirmed());
+            context.setReturnValue(true);
         }
         return context;
     }
