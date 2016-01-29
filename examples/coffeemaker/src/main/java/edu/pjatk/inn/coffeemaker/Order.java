@@ -13,4 +13,7 @@ public interface Order {
     public Order createOrder(Context context) throws RemoteException, ContextException;
 
     public Context confirmOrder(Context context) throws RemoteException, ContextException;
+
+    public Context finishOrder(Context context) throws RemoteException, ContextException;
+
 }

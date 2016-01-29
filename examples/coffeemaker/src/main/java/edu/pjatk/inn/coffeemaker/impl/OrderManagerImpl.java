@@ -44,7 +44,24 @@ public class OrderManagerImpl implements OrderManager{
 
     @Override
     public Context makeReport(Context context) throws RemoteException, ContextException {
-        return null;
+        Context cxt = new ServiceContext();
+        OrderImpl o = null;
+        Set<Map.Entry<Float, OrderImpl>> a = orderList.entrySet();
+        Iterator<Map.Entry<Float, OrderImpl>> z = a.iterator();
+        String sr="";
+        String sb="";
+        int licznik=1;
+        while (z.hasNext()){
+            Map.Entry<Float, OrderImpl> p = z.next();
+            Recipe recipe = p.getValue().getRecipe();
+            Boolean b = p.getValue().isFinished();
+            sr=recipe.getName()+" " + licznik;
+            sb=b+" " + licznik;
+            cxt.putValue(sr,recipe);
+            cxt.putValue(sb,b);
+        }
+
+            return cxt;
     }
 
     @Override

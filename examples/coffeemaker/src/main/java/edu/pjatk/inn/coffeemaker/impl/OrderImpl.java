@@ -131,6 +131,17 @@ public class OrderImpl implements Order {
         if (context.getReturnPath() != null) {
             context.setReturnValue(true);
         }
+        this.confirmed=true;
+        return context;
+    }
+
+    @Override
+    public Context finishOrder(Context context) throws RemoteException, ContextException {
+        context.putValue("order/finished", true);
+        if (context.getReturnPath() != null) {
+            context.setReturnValue(true);
+        }
+        this.finished=true;
         return context;
     }
 
